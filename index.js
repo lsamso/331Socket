@@ -17,5 +17,5 @@ io.on("connection", function (socket) {
     });
 });
 const PORT = process.env.PORT || 3000
-io.listen(PORT, "0.0.0.0"); // Start WebSocket server on port 4000
+io.listen(PORT); // Start WebSocket server on port 4000
 console.log("WebSocket server running on port " + PORT);
