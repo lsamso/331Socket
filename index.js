@@ -4,6 +4,7 @@ const io = new Server({
     cors: {
         origin: "*", // Allow all origins (adjust for security)
         methods: ["GET", "POST"],
+        credentials: true
     },
 });
 io.on("connection", function (socket) {
