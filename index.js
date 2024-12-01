@@ -4,7 +4,6 @@ const io = new Server({
     cors: {
         origin: "*", // Allow all origins (adjust for security)
         methods: ["GET", "POST"],
-        credentials: true
     },
 });
 io.on("connection", function (socket) {
@@ -17,5 +16,5 @@ io.on("connection", function (socket) {
         console.log("Client disconnected: ".concat(socket.id));
     });
 });
-io.listen(4000); // Start WebSocket server on port 4000
-console.log("WebSocket server running on port 4000");
+io.listen(3000); // Start WebSocket server on port 4000
+console.log("WebSocket server running on port 3000");
