@@ -1,5 +1,5 @@
-const { Server } = require("socket.io");
-const http = require("http");
+import {Server} from "socket.io"
+import http from "http"
 
 // Create an HTTP server
 const app = http.createServer((req, res) => {
