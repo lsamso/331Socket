@@ -1,11 +1,16 @@
-import { Server } from 'socket.io';
+const { Server } = require("socket.io");
+const http = require("http");
 
-const io = new Server({
-    cors: {
-        origin: "*", // Allow all origins (adjust for security)
-        methods: ["GET", "POST"],
-    },
+// Create an HTTP server
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('WebSocket server is running');
 });
+
+// Initialize socket.io server with the HTTP server
+const io = new Server(app);
+
+// Handle WebSocket connections
 io.on("connection", function (socket) {
     console.log("New client connected: ".concat(socket.id));
     socket.on("orderPaid", function (data) {
@@ -16,6 +21,12 @@ io.on("connection", function (socket) {
         console.log("Client disconnected: ".concat(socket.id));
     });
 });
-const PORT = process.env.PORT || 3000
-const HOST = '0.0.0.0'
-io.listen(PORT, ()=> console.log(`websocket running on ${HOST}:${PORT}`)); // Start WebSocket server on port 4000
+
+// Use the PORT environment variable provided by Railway (or fallback to 4000 locally)
+const PORT = process.env.PORT || 4000;
+const HOST = '0.0.0.0';  // Railway expects this
+
+// Start the server listening on HOST and PORT
+app.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`);
+});
