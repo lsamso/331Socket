@@ -8,7 +8,13 @@ const app = http.createServer((req, res) => {
 });
 
 // Initialize socket.io server with the HTTP server
-const io = new Server(app);
+const io = new Server(app, {
+    cors: {
+      origin: "*", 
+      methods: ["GET", "POST"],
+    },
+  });
+  
 
 // Handle WebSocket connections
 io.on("connection", function (socket) {
@@ -23,7 +29,7 @@ io.on("connection", function (socket) {
 });
 
 // Use the PORT environment variable provided by Railway (or fallback to 4000 locally)
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0';  // Railway expects this
 
 // Start the server listening on HOST and PORT
